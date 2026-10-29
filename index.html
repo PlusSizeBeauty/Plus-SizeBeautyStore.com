@@ -7,111 +7,846 @@
     <title>PlusSizeBeauty | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f7f0f2;
+        --surface: #ffffff;
+        --pink-1: #f8dfe7;
+        --pink-2: #f2c7d4;
+        --pink-3: #e8afc0;
+        --pink-strong: #d8336d;
+        --pink-deep: #9b1d4b;
+        --text: #2a1e22;
+        --muted: #5d4b51;
+        --gold: #d7af62;
+        --gold-deep: #a67a2c;
+        --shadow: rgba(44, 18, 32, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Montserrat", sans-serif;
+      }
+      a { text-decoration: none; color: inherit; }
+      img { max-width: 100%; display: block; }
+      .container {
+        width: min(1280px, 96vw);
+        margin: 0 auto;
+      }
+      .site {
+        background: #fff;
+        box-shadow: 0 18px 40px rgba(48, 24, 30, 0.08);
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 26px 12px;
+        background: #fff;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #ffdfe8 0%, #ee9ab3 20%, #d94c79 42%, #7b173d 100%);
+        border: 2px solid #eda7bb;
+        position: relative;
+      }
+      .brand-mark::before {
+        content: "";
+        position: absolute;
+        inset: 10px 9px 10px 9px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.72);
+      }
+      .brand-name {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+        font-weight: 700;
+        letter-spacing: -0.06em;
+        line-height: 1;
+      }
+      .brand-name .pink { color: var(--pink-strong); }
+
+      .top-icons {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 1.5rem;
+      }
+
+      .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #f4ecee;
+        border-radius: 999px;
+        padding: 6px 10px;
+        border: 1px solid rgba(0,0,0,0.04);
+      }
+
+      .lang-button {
+        border: none;
+        background: transparent;
+        font-weight: 700;
+        cursor: pointer;
+        color: var(--text);
+        opacity: 0.7;
+        padding: 6px 8px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+      }
+      .lang-button.active {
+        background: var(--pink-strong);
+        color: white;
+        opacity: 1;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px 22px;
+        padding: 12px 20px 18px;
+        background: #fff;
+      }
+      .nav a {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--text);
+      }
+
+      .hero {
+        position: relative;
+        background: linear-gradient(90deg, #f1dde5 0%, #f4dfe8 35%, #f4c8d7 100%);
+        min-height: 620px;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 10% 14%, rgba(255,255,255,0.35), transparent 20%),
+          radial-gradient(circle at 80% 12%, rgba(255,255,255,0.28), transparent 18%),
+          linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        min-height: 620px;
+        align-items: center;
+      }
+      .hero-copy { padding: 32px 28px 28px 42px; }
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.73rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #7f4560;
+        font-weight: 800;
+      }
+      .hero h1 {
+        margin: 18px 0 14px;
+        font-size: clamp(3rem, 6vw, 7rem);
+        line-height: 0.9;
+        letter-spacing: -0.08em;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 10px 18px rgba(89, 18, 42, 0.1);
+      }
+      .hero h2 {
+        margin: 0 0 16px;
+        font-size: clamp(2.1rem, 3vw, 3.5rem);
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        color: #4d1d2d;
+      }
+      .hero p {
+        max-width: 520px;
+        margin: 0 0 28px;
+        font-size: 1.08rem;
+        line-height: 1.7;
+        color: #573241;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 220px;
+        height: 54px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(180deg, var(--pink-strong) 0%, var(--pink-deep) 100%);
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 16px 24px rgba(102, 26, 56, 0.14);
+      }
+      .hero-visual {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        height: 100%;
+        padding: 20px 20px 0 0;
+      }
+      .hero-visual img {
+        width: min(620px, 96%);
+        height: 560px;
+        object-fit: cover;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 20px 32px rgba(82, 20, 44, 0.08);
+      }
+
+      .section { padding: 30px 18px 40px; }
+      .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 0 20px;
+      }
+      .section-header h3 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2.3vw, 2.6rem);
+        letter-spacing: -0.05em;
+      }
+      .link-more {
+        display: inline-block;
+        font-weight: 700;
+        color: var(--pink-deep);
+      }
+
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(180px, 1fr));
+        gap: 18px;
+      }
+      .card {
+        background: linear-gradient(180deg, #f8ebf0 0%, #fff9fb 100%);
+        border: 1px solid rgba(124, 51, 80, 0.06);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 12px 20px rgba(96, 32, 49, 0.04);
+      }
+      .card-image {
+        height: 220px;
+        background-size: cover;
+        background-position: center;
+      }
+      .card-title {
+        text-align: center;
+        padding: 16px 14px 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(180px, 1fr));
+        gap: 18px;
+      }
+      .feature {
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(131, 62, 88, 0.08);
+        border-radius: 18px;
+        padding: 20px 16px;
+        text-align: center;
+        box-shadow: 0 10px 18px rgba(96, 32, 49, 0.04);
+      }
+      .feature-icon {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 14px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        color: var(--pink-strong);
+        font-size: 1.7rem;
+        font-weight: 800;
+      }
+      .feature h4 { margin: 0 0 8px; font-size: 1rem; line-height: 1.3; }
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .story {
+        background: linear-gradient(180deg, #f9e5ec 0%, #f5dfe8 100%);
+        border-radius: 22px;
+        padding: 18px;
+      }
+      .story-inner {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 18px;
+        align-items: center;
+      }
+      .story-photo {
+        min-height: 260px;
+        border-radius: 18px;
+        background-size: cover;
+        background-position: center;
+      }
+      .story-copy h3 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.05em;
+      }
+      .story-copy p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .btn-light {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 160px;
+        height: 48px;
+        border-radius: 10px;
+        border: none;
+        background: #fff;
+        color: var(--text);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .contact-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .contact-card {
+        background: linear-gradient(180deg, #fff 0%, #fff8fb 100%);
+        border: 1px solid rgba(123, 52, 84, 0.08);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 12px 18px rgba(90, 28, 48, 0.04);
+      }
+      .contact-card h4 { margin: 0 0 12px; font-size: 1.2rem; }
+      .contact-card p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+      footer {
+        background: #1a1115;
+        color: white;
+        padding: 26px 18px 32px;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .footer-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        letter-spacing: -0.06em;
+      }
+      .socials {
+        display: flex;
+        gap: 10px;
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 980px) {
+        .hero-inner { grid-template-columns: 1fr; }
+        .hero-copy {
+          padding: 32px 24px 0;
+          text-align: center;
+        }
+        .hero p { margin-left: auto; margin-right: auto; }
+        .hero-visual { padding: 0 18px 18px; }
+        .grid-4, .feature-grid { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
+        .story-inner, .contact-box { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 640px) {
+        .topbar { padding: 14px 16px 10px; }
+        .nav { gap: 8px 14px; padding: 8px 12px 14px; }
+        .hero { min-height: auto; }
+        .hero-visual img { height: 420px; }
+        .grid-4, .feature-grid { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
-  <body class="page home-page">
-    <header class="site-header">
-      <div class="container nav-wrap">
-        <div class="brand-block">
-          <div class="brand-mark">P</div>
-          <div class="brand-copy">
-            <span class="brand-name">PlusSizeBeauty</span>
-            <span class="brand-tag" data-i18n="brandTag">Fashion • Beauty • Confidence</span>
-          </div>
+  <body>
+    <div class="container site">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div class="brand-name"><span class="pink">Plus</span>SizeBeauty</div>
         </div>
 
-        <nav class="main-nav" aria-label="Main navigation">
-          <a href="index.html" class="active" data-i18n="navHome">Home</a>
-          <a href="index.html" data-i18n="navFashion">Fashion</a>
-          <a href="beauty.html" data-i18n="navBeauty">Beauty</a>
-          <a href="hair-care.html" data-i18n="navHair">Hair Care</a>
-          <a href="skin-care.html" data-i18n="navSkin">Skin Care</a>
-          <a href="#" data-i18n="navStyle">Style Guides</a>
-          <a href="#" data-i18n="navStories">Stories</a>
-          <a href="#" data-i18n="navShop">Shop</a>
-          <a href="#" data-i18n="navAbout">About</a>
-        </nav>
-
-        <div class="header-tools">
-          <div class="lang-switcher" aria-label="Language selector">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="es">ES</button>
-            <button class="lang-btn" data-lang="fr">FR</button>
+        <div class="top-icons">
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-button active" data-lang="en">EN</button>
+            <button class="lang-button" data-lang="es">ES</button>
+            <button class="lang-button" data-lang="fr">FR</button>
           </div>
-          <div class="header-icons" aria-label="Header actions">
-            <span>⌕</span>
-            <span>♡</span>
-            <span>🛍</span>
+          <span>⌕</span>
+          <span>♡</span>
+          <span>🛒</span>
+        </div>
+      </header>
+
+      <nav class="nav">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#fashion" data-i18n="nav.fashion">Fashion</a>
+        <a href="#beauty" data-i18n="nav.beauty">Beauty</a>
+        <a href="#skincare" data-i18n="nav.skincare">Skin Care</a>
+        <a href="#haircare" data-i18n="nav.haircare">Hair Care</a>
+        <a href="#guides" data-i18n="nav.guides">Style Guides</a>
+        <a href="#stores" data-i18n="nav.stores">Stores</a>
+        <a href="#shop" data-i18n="nav.shop">Shop</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <main>
+        <section id="home" class="hero">
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <span class="eyebrow" data-i18n="hero.eyebrow">Fashion • Beauty • Confidence</span>
+              <h1 data-i18n="hero.title">Fashion</h1>
+              <h2 data-i18n="hero.subtitle">Trendy Looks<br>For Every Curve</h2>
+              <p data-i18n="hero.text">Discover styles, fits, and outfit ideas that celebrate your shape and make you feel amazing.</p>
+              <button class="cta" data-i18n="hero.button">Shop Fashion</button>
+            </div>
+
+            <div class="hero-visual">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Plus-size model" />
+            </div>
+          </div>
+        </section>
+
+        <section id="fashion" class="section">
+          <div class="section-header">
+            <h3 data-i18n="fashion.title">Fashion</h3>
+            <a href="#" class="link-more" data-i18n="common.viewAll">View all</a>
+          </div>
+
+          <div class="grid-4">
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="cats.dresses">Dresses</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="cats.tops">Tops</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="cats.jeans">Jeans</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="cats.activewear">Activewear</div>
+            </article>
+          </div>
+        </section>
+
+        <section id="beauty" class="section">
+          <div class="section-header">
+            <h3 data-i18n="beauty.title">Beauty</h3>
+            <a href="#" class="link-more" data-i18n="common.viewAll">View all</a>
+          </div>
+
+          <div class="grid-4">
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="beauty.face">Face Makeup</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="beauty.lip">Lip Makeup</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="beauty.eye">Eye Makeup</div>
+            </article>
+
+            <article class="card">
+              <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80');"></div>
+              <div class="card-title" data-i18n="beauty.tools">Makeup Tools</div>
+            </article>
+          </div>
+        </section>
+
+        <section id="skincare" class="section">
+          <div class="section-header">
+            <h3 data-i18n="skincare.title">Skin Care</h3>
+            <a href="#" class="link-more" data-i18n="common.viewAll">View all</a>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-icon">✦</div>
+              <h4 data-i18n="skincare.cleanser">Cleansers</h4>
+              <p data-i18n="skincare.cleanserText">Fresh, gentle daily cleansing.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">◎</div>
+              <h4 data-i18n="skincare.moisturizer">Moisturizers</h4>
+              <p data-i18n="skincare.moisturizerText">Hydration that keeps skin soft and balanced.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">◌</div>
+              <h4 data-i18n="skincare.serum">Serums</h4>
+              <p data-i18n="skincare.serumText">Targeted glow and nourishment.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">✧</div>
+              <h4 data-i18n="skincare.treatment">Treatments</h4>
+              <p data-i18n="skincare.treatmentText">Support for brighter, healthier skin.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="haircare" class="section">
+          <div class="section-header">
+            <h3 data-i18n="haircare.title">Hair Care</h3>
+            <a href="#" class="link-more" data-i18n="common.viewAll">View all</a>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-icon">✧</div>
+              <h4 data-i18n="haircare.gently">Cleanse Gently</h4>
+              <p data-i18n="haircare.gentlyText">Smooth cleansing without stripping.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">✦</div>
+              <h4 data-i18n="haircare.nourish">Nourishes &amp; Strengthens</h4>
+              <p data-i18n="haircare.nourishText">Healthy shine and stronger strands.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">◌</div>
+              <h4 data-i18n="haircare.shine">Adds Shine</h4>
+              <p data-i18n="haircare.shineText">Gloss, softness, and silky movement.</p>
+            </div>
+
+            <div class="feature">
+              <div class="feature-icon">♡</div>
+              <h4 data-i18n="haircare.breakage">Reduces Breakage</h4>
+              <p data-i18n="haircare.breakageText">Support for stronger, healthier hair.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section">
+          <div class="story">
+            <div class="story-inner">
+              <div class="story-photo" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80');"></div>
+
+              <div class="story-copy">
+                <h3 data-i18n="about.title">Our Story</h3>
+                <p data-i18n="about.text">Plus Size Beauty is a celebration of real women, real beauty, and real confidence. We believe that every curve is beautiful and every woman deserves to look and feel amazing.</p>
+
+                <div class="cta-row">
+                  <button class="cta" data-i18n="about.button">Learn More</button>
+                  <button class="btn-light" data-i18n="about.secondary">Our Mission</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="section">
+          <div class="section-header">
+            <h3 data-i18n="contact.title">Contact</h3>
+          </div>
+
+          <div class="contact-box">
+            <div class="contact-card">
+              <h4 data-i18n="contact.emailTitle">Email Us</h4>
+              <p data-i18n="contact.emailText">hello@plussizebeauty.com</p>
+            </div>
+
+            <div class="contact-card">
+              <h4 data-i18n="contact.hoursTitle">Hours</h4>
+              <p data-i18n="contact.hoursText">Mon–Fri: 9:00 AM – 6:00 PM</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-inner">
+          <div class="footer-brand">PlusSizeBeauty</div>
+
+          <div class="socials">
+            <span>◎</span>
+            <span>◌</span>
+            <span>◍</span>
           </div>
         </div>
-      </div>
-    </header>
+      </footer>
+    </div>
 
-    <main>
-      <section class="fashion-hero">
-        <div class="container hero-grid">
-          <div class="hero-portrait-wrap">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Woman wearing a bold fashion look" />
-          </div>
+    <script>
+      const translations = {
+        en: {
+          "nav.home": "Home",
+          "nav.fashion": "Fashion",
+          "nav.beauty": "Beauty",
+          "nav.skincare": "Skin Care",
+          "nav.haircare": "Hair Care",
+          "nav.guides": "Style Guides",
+          "nav.stores": "Stores",
+          "nav.shop": "Shop",
+          "nav.about": "About",
+          "nav.contact": "Contact",
 
-          <div class="hero-copy">
-            <h1 data-i18n="fashionTitle">Fashion</h1>
-            <h2 data-i18n="fashionSubtitle">Trendy Looks For Every Curve</h2>
-            <p data-i18n="fashionText">Discover styles, fits, and outfit ideas that celebrate your shape and make you feel amazing.</p>
-            <button type="button" class="button button-primary" data-i18n="shopFashionBtn">Shop Fashion</button>
-          </div>
-        </div>
-      </section>
+          "hero.eyebrow": "Fashion • Beauty • Confidence",
+          "hero.title": "Fashion",
+          "hero.subtitle": "Trendy Looks<br>For Every Curve",
+          "hero.text": "Discover styles, fits, and outfit ideas that celebrate your shape and make you feel amazing.",
+          "hero.button": "Shop Fashion",
 
-      <section class="collection-section">
-        <div class="container collection-grid">
-          <article class="mini-card">
-            <div class="mini-photo photo-dress"></div>
-            <div class="mini-label" data-i18n="cardDress">Dresses</div>
-          </article>
+          "fashion.title": "Fashion",
+          "beauty.title": "Beauty",
+          "skincare.title": "Skin Care",
+          "haircare.title": "Hair Care",
+          "common.viewAll": "View all",
 
-          <article class="mini-card">
-            <div class="mini-photo photo-top"></div>
-            <div class="mini-label" data-i18n="cardTop">Tops</div>
-          </article>
+          "cats.dresses": "Dresses",
+          "cats.tops": "Tops",
+          "cats.jeans": "Jeans",
+          "cats.activewear": "Activewear",
 
-          <article class="mini-card">
-            <div class="mini-photo photo-jeans"></div>
-            <div class="mini-label" data-i18n="cardJeans">Jeans</div>
-          </article>
+          "beauty.face": "Face Makeup",
+          "beauty.lip": "Lip Makeup",
+          "beauty.eye": "Eye Makeup",
+          "beauty.tools": "Makeup Tools",
 
-          <article class="mini-card">
-            <div class="mini-photo photo-activewear"></div>
-            <div class="mini-label" data-i18n="cardActivewear">Activewear</div>
-          </article>
-        </div>
-      </section>
-    </main>
+          "skincare.cleanser": "Cleansers",
+          "skincare.cleanserText": "Fresh, gentle daily cleansing.",
+          "skincare.moisturizer": "Moisturizers",
+          "skincare.moisturizerText": "Hydration that keeps skin soft and balanced.",
+          "skincare.serum": "Serums",
+          "skincare.serumText": "Targeted glow and nourishment.",
+          "skincare.treatment": "Treatments",
+          "skincare.treatmentText": "Support for brighter, healthier skin.",
 
-    <footer class="site-footer">
-      <div class="container footer-wrap">
-        <div class="footer-brand-block">
-          <div class="brand-mark small">P</div>
-          <div>
-            <span class="footer-brand">PlusSizeBeauty</span>
-            <small data-i18n="brandTagFooter">Fashion • Beauty • Confidence</small>
-          </div>
-        </div>
+          "haircare.gently": "Cleanse Gently",
+          "haircare.gentlyText": "Smooth cleansing without stripping.",
+          "haircare.nourish": "Nourishes & Strengthens",
+          "haircare.nourishText": "Healthy shine and stronger strands.",
+          "haircare.shine": "Adds Shine",
+          "haircare.shineText": "Gloss, softness, and silky movement.",
+          "haircare.breakage": "Reduces Breakage",
+          "haircare.breakageText": "Support for stronger, healthier hair.",
 
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="index.html" data-i18n="navHome">Home</a>
-          <a href="beauty.html" data-i18n="navBeauty">Beauty</a>
-          <a href="hair-care.html" data-i18n="navHair">Hair Care</a>
-          <a href="skin-care.html" data-i18n="navSkin">Skin Care</a>
-          <a href="#" data-i18n="navStories">Stories</a>
-          <a href="#" data-i18n="navShop">Shop</a>
-          <a href="#" data-i18n="navAbout">Contact</a>
-        </nav>
-      </div>
-    </footer>
+          "about.title": "Our Story",
+          "about.text": "Plus Size Beauty is a celebration of real women, real beauty, and real confidence. We believe that every curve is beautiful and every woman deserves to look and feel amazing.",
+          "about.button": "Learn More",
+          "about.secondary": "Our Mission",
 
-    <script src="script.js"></script>
+          "contact.title": "Contact",
+          "contact.emailTitle": "Email Us",
+          "contact.emailText": "hello@plussizebeauty.com",
+          "contact.hoursTitle": "Hours",
+          "contact.hoursText": "Mon–Fri: 9:00 AM – 6:00 PM"
+        },
+
+        es: {
+          "nav.home": "Inicio",
+          "nav.fashion": "Moda",
+          "nav.beauty": "Belleza",
+          "nav.skincare": "Cuidado de la piel",
+          "nav.haircare": "Cuidado del cabello",
+          "nav.guides": "Guías de estilo",
+          "nav.stores": "Tiendas",
+          "nav.shop": "Comprar",
+          "nav.about": "Nosotros",
+          "nav.contact": "Contacto",
+
+          "hero.eyebrow": "Moda • Belleza • Confianza",
+          "hero.title": "Moda",
+          "hero.subtitle": "Looks modernos<br>para cada curva",
+          "hero.text": "Descubre estilos, cortes y looks que celebran tu figura y te hacen sentir increíble.",
+          "hero.button": "Comprar moda",
+
+          "fashion.title": "Moda",
+          "beauty.title": "Belleza",
+          "skincare.title": "Cuidado de la piel",
+          "haircare.title": "Cuidado del cabello",
+          "common.viewAll": "Ver todo",
+
+          "cats.dresses": "Vestidos",
+          "cats.tops": "Blusas",
+          "cats.jeans": "Jeans",
+          "cats.activewear": "Ropa deportiva",
+
+          "beauty.face": "Maquillaje facial",
+          "beauty.lip": "Labios",
+          "beauty.eye": "Ojos",
+          "beauty.tools": "Herramientas",
+
+          "skincare.cleanser": "Limpiadores",
+          "skincare.cleanserText": "Limpieza suave y fresca diaria.",
+          "skincare.moisturizer": "Humectantes",
+          "skincare.moisturizerText": "Hidratación para una piel suave y equilibrada.",
+          "skincare.serum": "Sueros",
+          "skincare.serumText": "Brillo y nutrición focalizados.",
+          "skincare.treatment": "Tratamientos",
+          "skincare.treatmentText": "Apoyo para una piel más radiante y saludable.",
+
+          "haircare.gently": "Limpieza suave",
+          "haircare.gentlyText": "Limpieza sedosa sin resecar.",
+          "haircare.nourish": "Nutre y fortalece",
+          "haircare.nourishText": "Brillo saludable y cabellos más fuertes.",
+          "haircare.shine": "Da brillo",
+          "haircare.shineText": "Brillo, suavidad y movimiento sedoso.",
+          "haircare.breakage": "Reduce la rotura",
+          "haircare.breakageText": "Apoyo para un cabello más fuerte y saludable.",
+
+          "about.title": "Nuestra historia",
+          "about.text": "Plus Size Beauty es una celebración de mujeres reales, belleza real y confianza real. Creemos que cada curva es hermosa y que cada mujer merece verse y sentirse increíble.",
+          "about.button": "Saber más",
+          "about.secondary": "Nuestra misión",
+
+          "contact.title": "Contacto",
+          "contact.emailTitle": "Escríbenos",
+          "contact.emailText": "hello@plussizebeauty.com",
+          "contact.hoursTitle": "Horario",
+          "contact.hoursText": "Lun–Vie: 9:00 AM – 6:00 PM"
+        },
+
+        fr: {
+          "nav.home": "Accueil",
+          "nav.fashion": "Mode",
+          "nav.beauty": "Beauté",
+          "nav.skincare": "Soins de la peau",
+          "nav.haircare": "Soins des cheveux",
+          "nav.guides": "Guides de style",
+          "nav.stores": "Boutiques",
+          "nav.shop": "Boutique",
+          "nav.about": "À propos",
+          "nav.contact": "Contact",
+
+          "hero.eyebrow": "Mode • Beauté • Confiance",
+          "hero.title": "Mode",
+          "hero.subtitle": "Looks tendance<br>pour chaque silhouette",
+          "hero.text": "Découvrez des styles, des coupes et des idées qui célèbrent votre forme et vous font vous sentir incroyable.",
+          "hero.button": "Acheter la mode",
+
+          "fashion.title": "Mode",
+          "beauty.title": "Beauté",
+          "skincare.title": "Soins de la peau",
+          "haircare.title": "Soins des cheveux",
+          "common.viewAll": "Voir tout",
+
+          "cats.dresses": "Robes",
+          "cats.tops": "Hauts",
+          "cats.jeans": "Jeans",
+          "cats.activewear": "Vêtements de sport",
+
+          "beauty.face": "Maquillage visage",
+          "beauty.lip": "Maquillage lèvres",
+          "beauty.eye": "Maquillage yeux",
+          "beauty.tools": "Outils beauté",
+
+          "skincare.cleanser": "Nettoyants",
+          "skincare.cleanserText": "Nettoyage doux et frais au quotidien.",
+          "skincare.moisturizer": "Hydratants",
+          "skincare.moisturizerText": "Hydratation pour une peau douce et équilibrée.",
+          "skincare.serum": "Sérums",
+          "skincare.serumText": "Éclat et nutrition ciblés.",
+          "skincare.treatment": "Traitements",
+          "skincare.treatmentText": "Soutien pour une peau plus lumineuse et plus saine.",
+
+          "haircare.gently": "Nettoyage doux",
+          "haircare.gentlyText": "Nettoyage en douceur sans dessécher.",
+          "haircare.nourish": "Nourrit et renforce",
+          "haircare.nourishText": "Brillance saine et cheveux plus forts.",
+          "haircare.shine": "Apporte de l’éclat",
+          "haircare.shineText": "Brillance, douceur et mouvement soyeux.",
+          "haircare.breakage": "Réduit la casse",
+          "haircare.breakageText": "Soutien pour des cheveux plus forts et plus sains.",
+
+          "about.title": "Notre histoire",
+          "about.text": "Plus Size Beauty célèbre les femmes réelles, la vraie beauté et la vraie confiance. Nous croyons que chaque courbe est belle et que chaque femme mérite de se sentir magnifique.",
+          "about.button": "En savoir plus",
+          "about.secondary": "Notre mission",
+
+          "contact.title": "Contact",
+          "contact.emailTitle": "Écrivez-nous",
+          "contact.emailText": "hello@plussizebeauty.com",
+          "contact.hoursTitle": "Horaires",
+          "contact.hoursText": "Lun–Ven: 9:00 – 18:00"
+        }
+      };
+
+      const defaultLang = "en";
+      const langButtons = document.querySelectorAll(".lang-button");
+
+      function applyLanguage(lang) {
+        const dict = translations[lang];
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n;
+          if (dict[key]) {
+            el.innerHTML = dict[key];
+          }
+        });
+
+        langButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+
+        document.documentElement.lang = lang;
+      }
+
+      langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          applyLanguage(btn.dataset.lang);
+        });
+      });
+
+      applyLanguage(defaultLang);
+    </script>
   </body>
 </html>
-
